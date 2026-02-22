@@ -10,13 +10,13 @@ def transform_data(df_raw):
     # Remplir les valeurs nulles fictives éventuelles
     df = df.dropna()
     
-    # Feature Engineering : Moyenne glissante par pompe sur 3 heures
-    df_sorted = df.sort_values(by=['pump_id', 'timestamp'])
+    # Feature Engineering : Moyenne glissante par locomotive sur 3 heures
+    df_sorted = df.sort_values(by=['loco_id', 'timestamp'])
     
-    df_sorted['vibration_rolling_mean'] = df_sorted.groupby('pump_id')['vibration'].transform(
+    df_sorted['vibration_rolling_mean'] = df_sorted.groupby('loco_id')['vibration'].transform(
         lambda x: x.rolling(window=3, min_periods=1).mean()
     )
-    df_sorted['pressure_rolling_mean'] = df_sorted.groupby('pump_id')['pressure'].transform(
+    df_sorted['pressure_rolling_mean'] = df_sorted.groupby('loco_id')['pressure'].transform(
         lambda x: x.rolling(window=3, min_periods=1).mean()
     )
     

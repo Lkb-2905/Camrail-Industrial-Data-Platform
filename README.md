@@ -1,5 +1,5 @@
 🌍 DOSSIER DE CONFIGURATION D'EXPLOITATION (DCE)
-🌍 TotalEnergies Industrial Data Platform (End-to-End) V1.0
+🌍 Camrail Industrial Data Platform (End-to-End) V1.0
 ![Python](https://img.shields.io/badge/Python-3.12-blue) ![SQLite](https://img.shields.io/badge/SQLite-Data_Warehouse-lightgrey) ![Scikit-Learn](https://img.shields.io/badge/Scikit_Learn-Machine_Learning-orange) ![Power BI](https://img.shields.io/badge/Power_BI-Data_Visualization-yellow)
 
 **Version:** 1.0.0 Stable | **Date:** Février 2026  
@@ -26,7 +26,7 @@
 ## 🎯 VUE D'ENSEMBLE DU PROJET
 
 ### Contexte & Objectifs
-Ce projet démontre la mise en œuvre d'une architecture de données de bout en bout (End-to-End) unifiant l'**Ingénierie de Données (ETL)** et la **Data Science (IA)**. Il s'inscrit dans le contexte critique de la Supply Chain logistique de l'énergie, illustrant un profil "Full-Stack Data".
+Ce projet démontre la mise en œuvre d'une architecture de données de bout en bout (End-to-End) unifiant l'**Ingénierie de Données (ETL)** et la **Data Science (IA)**. Il s'inscrit dans le contexte critique de la logistique ferroviaire de fret (Camrail - Bolloré Logistics à Douala), illustrant un profil "Full-Stack Data".
 
 ✅ **Data Engineering (Extraction & Chargement) :** Orchestration d'un pipeline ETL simulant des dizaines de milliers de lignes de télémétrie vers un SQL Data Warehouse.
 ✅ **Data Transformation (Nettoyage) :** Feature engineering avancé avec Pandas (Moyennes glissantes thermiques et vibratoires).
@@ -51,7 +51,7 @@ Ce projet démontre la mise en œuvre d'une architecture de données de bout en 
 ```mermaid
 graph TB
     subgraph "Phase 1 : DATA ENGINEERING (ETL)"
-        A[📡 Capteurs IoT Logistiques] -->|Extraction| B[🐍 Nettoyage & Feature Engineering]
+        A[📡 Capteurs IoT Locomotives] -->|Extraction| B[🐍 Nettoyage & Feature Engineering]
         B -->|SQLAlchemy : Upsert| C[(database/industrial_dwh.sqlite)]
     end
     
@@ -130,7 +130,7 @@ python --version  # Doit être >= 3.12
 ### Installation Express
 ```bash
 # 1. Naviguer dans le dossier du projet
-cd TotalEnergies-Industrial-Data-Platform
+cd Camrail-Industrial-Data-Platform
 
 # 2. Créer un environnement virtuel (Recommandé)
 python -m venv env

@@ -35,14 +35,14 @@ def train_and_predict(engine):
     os.makedirs('data_science/models', exist_ok=True)
     joblib.dump(model, 'data_science/models/rf_failure_predict.joblib')
     
-    # 2. Inférence (Calcul des Probabilités pour toutes les machines Maintentant)
+    # 2. Inférence (Calcul des Probabilités pour toutes les locomotives Maintenant)
     logger.info("⚡ [IA] Génération des prédictions à haut risque pour Power BI...")
     
     probabilities = model.predict_proba(X)[:, 1]  # Probabilité d'avoir la classe "1" (Panne)
     predictions = model.predict(X)
     
     # 3. Création du Datamart Final (La table PowerBI parfaite)
-    df_powerbi = df[['timestamp', 'pump_id', 'flow_rate', 'pressure', 'vibration', 'temperature']].copy()
+    df_powerbi = df[['timestamp', 'loco_id', 'flow_rate', 'pressure', 'vibration', 'temperature']].copy()
     
     df_powerbi['ai_risk_score_percent'] = np.round(probabilities * 100, 2)
     df_powerbi['ai_predicted_failure'] = predictions

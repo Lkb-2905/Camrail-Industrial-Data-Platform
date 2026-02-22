@@ -13,7 +13,7 @@ def main_orchestrator():
     logger.add("logs/platform_execution.log", rotation="2 MB")
     
     logger.info("=" * 60)
-    logger.info("🚀 DÉMARRAGE DU PIPELINE INDUSTRIAL PLATFORM (TOTAL ENERGIES)")
+    logger.info("🚀 DÉMARRAGE DU PIPELINE INDUSTRIAL PLATFORM (CAMRAIL / BOLLORÉ LOGISTICS)")
     logger.info("=" * 60)
     
     start_time = time.time()

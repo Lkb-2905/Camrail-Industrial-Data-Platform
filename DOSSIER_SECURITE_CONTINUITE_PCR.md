@@ -1,8 +1,8 @@
 🔰 DOSSIER DE SÉCURITÉ ET CONTINUITÉ (PCR/PRA)
-⚡ E2E-IDP : TotalEnergies Industrial Data Platform (End-to-End)
+⚡ E2E-IDP : Camrail Industrial Data Platform (End-to-End)
 Gestion de Crise • Continuité Logistique • Intégrité Base de Données • Résilience IA
 
-Classification: Confidentiel (Interne TotalEnergies) | Version: 1.0.0
+Classification: Confidentiel (Interne Camrail / Bolloré Logistics) | Version: 1.0.0
 Responsable: KAMENI TCHOUATCHEU GAETAN BRUNEL
 
 🔍 Analyse BIA • 🛡️ Stratégies PCA • 🔄 Procédures PRA • 📝 Maintenance MCO
@@ -80,7 +80,7 @@ Copy-Item "database/industrial_dwh.sqlite" "database/industrial_dwh_SAFE.sqlite"
 Write-Host "✅ Sandbox Data Warehouse sécurisée."
 
 # 3. Lancement d'Hivernage (Reborn)
-cd "C:\chemin\vers\TotalEnergies-Industrial-Data-Platform"
+cd "C:\chemin\vers\Camrail-Industrial-Data-Platform"
 .\env\Scripts\activate
 # Exécution du Master
 python run_industrial_platform.py
@@ -88,7 +88,7 @@ Write-Host "🚀 Processus d'usine redemarré. Vérifier la console d'historique
 ```
 
 ### 4.2. Stratégie de Sauvegarde (Backup)
-* **Code Source & Configuration :** Maintenu et tracé scrupuleusement sous `Git/GitHub` (GitHub repos : TotalEnergies-Industrial-Data-Platform).
+* **Code Source & Configuration :** Maintenu et tracé scrupuleusement sous `Git/GitHub` (GitHub repos : Camrail-Industrial-Data-Platform).
 * **Base Données Warehouse (SGBD) :** Les fichiers `.sqlite` et modèles `.joblib` doivent faire l'objet de plans de capture disque (Snapshot SAN) par le DSI une fois par semaine.
 
 ---
@@ -109,7 +109,7 @@ S'assurer de la solidité du pipeline complet sous charge.
 ## 🔧 ANNEXE TECHNIQUE
 ### Contacts d'Astreinte
 * **Responsable Technique :** Kameni Tchouatcheu (Ext. 06.XX.XX.XX.XX)
-* **Ingénierie & Architecture Data :** support-data-science@totalenergies.com
+* **Ingénierie & Architecture Data :** support-data-science@camrail.net
 
 ### Versions Validées en Production (Stack Fixée)
 * **Python Environnement :** 3.12.x
@@ -117,4 +117,4 @@ S'assurer de la solidité du pipeline complet sous charge.
 * **Scikit-Learn/Joblib :** STRICTEMENT Ancres respectives, 1.3.1 et 1.3.2 (Binarisation algorithmes IA).
 * **SQLAlchemy :** 2.0+
 
-*Ce document est la propriété de la Direction Supply & Logistique (Data Department). Dernière mise à jour : Février 2026 par G.B.K.T.*
+*Ce document est la propriété de la Direction Logistique Ferroviaire (Data Department). Dernière mise à jour : Février 2026 par G.B.K.T.*

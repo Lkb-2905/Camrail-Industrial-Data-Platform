@@ -13,8 +13,8 @@ def extract_sensor_data(num_records=5000):
     dates = [start_date + timedelta(hours=i) for i in range(num_records)]
     
     # Simulation des capteurs
-    pumps = [f"P_{str(i).zfill(3)}" for i in range(1, 6)]
-    pump_ids = np.random.choice(pumps, num_records)
+    locomotives = [f"LOCO_{str(i).zfill(3)}" for i in range(1, 6)]
+    loco_ids = np.random.choice(locomotives, num_records)
     
     # Métriques normales
     flow_rates = np.random.normal(500, 50, num_records)
@@ -35,7 +35,7 @@ def extract_sensor_data(num_records=5000):
     
     df_raw = pd.DataFrame({
         'timestamp': dates,
-        'pump_id': pump_ids,
+        'loco_id': loco_ids,
         'flow_rate': flow_rates,
         'pressure': pressures,
         'vibration': vibrations,
