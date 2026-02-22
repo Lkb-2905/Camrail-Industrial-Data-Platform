@@ -49,6 +49,48 @@ Il illustre de A à Z les compétences absolues suivantes :
 
 ## 🏗️ ARCHITECTURE TECHNIQUE
 
+### Diagramme de Flux
+```mermaid
+graph TD
+    subgraph Client Layer
+        U[👤 Opérateur Logistique]
+        P[BI Dashboard Live]
+        U -->|Pilotage| P
+    end
+
+    subgraph Application Layer
+        O[Orchestrateur Python]
+        E[ETL Python Engine]
+        O -->|Exécution Séquentielle| E
+    end
+
+    subgraph Data Sources
+        S[Flux Thermiques IoT]
+    end
+
+    subgraph Intelligence Layer
+        M[Python Engine<br>Scikit-Learn]
+        O -->|Appel Modèle ML| M
+    end
+
+    subgraph Database Layer
+        D[(Data Warehouse<br>SQLite)]
+    end
+
+    S -->|Signaux Bruts| E
+    E -->|Insertion Télémetrie| D
+    D -->|Lecture Données| M
+    M -->|Ecriture Prédictions| D
+    D -->|Exportation| P
+
+    style P fill:#4FC3F7,color:#000
+    style O fill:#4CAF50,color:#fff
+    style E fill:#4CAF50,color:#fff
+    style M fill:#FFD600,color:#000
+    style D fill:#9E9E9E,color:#fff
+    style S fill:#FF5252,color:#fff
+```
+
 ### Flux de Données Détaillé
 1. **Requête Orchestrateur** : Le Master script active la chronologie Data.
 2. **Phase ETL Backend** : La pipeline ingest les logs physiques (thermiques) simulées, nettoie l'encrassement (`Feature Engineering`) et insère massivement la télémétrie formatée dans `industrial_dwh.sqlite`.
