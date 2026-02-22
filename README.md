@@ -219,7 +219,7 @@ Ingénieur Logiciel & Data Scientist en devenir | Étudiant ESIEA
 🐙 GitHub : @Lkb-2905  
 
 🙏 **REMERCIEMENTS**
-* **TotalEnergies & Camrail :** Pour l'envergure des architectures d'Ingénierie de Haute Technologie.
+* **Bolloré Logistics & Camrail :** Pour l'envergure des architectures d'Ingénierie de Haute Technologie.
 * **ESIEA :** Pour l'esprit d'initiative.
 
 ⭐ Laissez une étoile pour soutenir le Full-Stack Data Engineering Européen !  
