@@ -1,5 +1,5 @@
 🌍 DOSSIER DE CONFIGURATION D'EXPLOITATION (DCE)
-🌍 Camrail Industrial Data Platform (End-to-End) V1.0
+# 🚂 Camrail Industrial Data Platform (End-to-End) V1.0
 ![Python](https://img.shields.io/badge/Python-3.12-blue) ![SQLite](https://img.shields.io/badge/SQLite-Data_Warehouse-lightgrey) ![Scikit-Learn](https://img.shields.io/badge/Scikit_Learn-Machine_Learning-orange) ![Power BI](https://img.shields.io/badge/Power_BI-Data_Visualization-yellow)
 
 **Version:** 1.0.0 Stable | **Date:** Février 2026  
@@ -29,8 +29,8 @@
 Ce projet démontre la mise en œuvre d'une architecture de données de bout en bout (End-to-End) unifiant l'**Ingénierie de Données (ETL)** et la **Data Science (IA)**. Il s'inscrit dans le contexte critique de la logistique ferroviaire de fret (Camrail - Bolloré Logistics à Douala), illustrant un profil "Full-Stack Data".
 
 ✅ **Data Engineering (Extraction & Chargement) :** Orchestration d'un pipeline ETL simulant des dizaines de milliers de lignes de télémétrie vers un SQL Data Warehouse.
-✅ **Data Transformation (Nettoyage) :** Feature engineering avancé avec Pandas (Moyennes glissantes thermiques et vibratoires).
-✅ **Data Science (Machine Learning) :** Algorithme de Random Forest se connectant directement au SQL pour scorer le risque de pannes et réinsérant ses résultats fermement dans la base de données.
+✅ **Data Transformation (Nettoyage) :** Feature engineering avancé avec Pandas (Moyennes glissantes thermiques et vibratoires des essieux).
+✅ **Data Science (Machine Learning) :** Algorithme de Random Forest se connectant directement au SQL pour scorer le risque de pannes des locomotives et réinsérant ses résultats fermement dans la base de données.
 ✅ **Data Visualization :** Spécifications pour une connexion en "Live" de Power BI à cette même base SQlite.
 ✅ **Automatisation IT :** Script d'orchestration global `run_industrial_platform.py` prêt pour un scheduler nocturne (CRON de nuit).
 
@@ -40,7 +40,7 @@ Ce projet démontre la mise en œuvre d'une architecture de données de bout en 
 | **Gouvernance de la Donnée** | Éviction des fichiers plats au profit d'une Source Unique de Vérité (SSOT) en SQL. |
 | **Bout en Bout** | Autonomie totale de la captation physique (simulée) jusqu'au tableau de bord du Décideur. |
 | **Maintenabilité** | Architecture hexagonale où ETL et Modélisation Machine Learning sont cloisonnés en sous-dossiers distincts. |
-| **Business Value** | KPI calculés (Alertes pannes) immédiatement interprétables (Passage d'une maintenance à date fixe à prescritptive). |
+| **Business Value** | KPI calculés (Alertes pannes) immédiatement interprétables (Passage d'une maintenance à date fixe à prescriptive). |
 
 ---
 
@@ -64,7 +64,7 @@ graph TB
     
     subgraph "Phase 3 : RESTITUTION (Power BI)"
         C -->|Connexion Live ODBC/SQLite| G[📉 Tableau de Bord Décisionnel]
-        G -->|Visualisation| H[Écran Directeur]
+        G -->|Visualisation| H[Écran Chef de Gare]
     end
     
     style C fill:#50C878,stroke:#333,stroke-width:2px,color:#000
@@ -74,11 +74,11 @@ graph TB
 
 ### Explication du Flux
 
-1. **Script de Tête (`run_industrial_platform.py`) :** C'est le chef d'orchestre. Lorsqu'il est lancé (par exemple par un Task Scheduler nocturne), il exécute les deux phases séquentiellement avec une gestion des exceptions.
-2. L'extraction (**`src/data_engineering/extract.py`**) génère 10 000 points de télémétrie bruts simulés (Pression, Température).
+1. **Script de Tête (`run_industrial_platform.py`) :** C'est le chef d'orchestre. Lorsqu'il est lancé, il exécute les deux phases séquentiellement avec une gestion des exceptions.
+2. L'extraction (**`src/data_engineering/extract.py`**) génère 10 000 points de télémétrie bruts simulés (Pression d'huile, Température moteur).
 3. La transformation (**`src/data_engineering/transform.py`**) crée les agrégats glissants (Rolling Means).
 4. Le chargeur (**`src/data_engineering/load.py`**) insère de façon transactionnelle les lignes traitées dans le *Data Warehouse* central (SQLite via SQLAlchemy).
-5. Aussitôt l'ETL terminé, l'Intelligence Artificielle (**`src/data_science/train_and_predict.py`**) se connecte en SQL (SELECT), s'entraîne, débusque les pannes imminentes, et génère et insère instantanément une table prédictive ("Score de risque probabilités = [0.1...0.99]") `ai_telemetry_predictions` dans ce même Data Warehouse SQL !
+5. Aussitôt l'ETL terminé, l'Intelligence Artificielle (**`src/data_science/train_and_predict.py`**) se connecte en SQL (SELECT), s'entraîne sur l'usure des locomotives, débusque les pannes imminentes, et génère et insère instantanément une table prédictive ("Score de risque probabilités = [0.1...0.99]") `ai_telemetry_predictions` dans ce même Data Warehouse SQL !
 
 ---
 
@@ -104,11 +104,11 @@ graph TB
 * Un script maître `run_industrial_platform.py` agit comme "Cron" process. Il pilote les dépendances et sécurise le flux (arrête tout si l'ETL échoue, évitant de faire crasher l'IA).
 
 **2. Simulation & Feature Engineering Data**
-* Génération pointue de 10k+ lignes avec des signaux de panne bruités (bruit gaussien de température). Lissage par moyenne mobile `Rolling` dans Pandas.
+* Génération pointue de 10k+ lignes avec des signaux de panne bruités (bruit gaussien de température moteurs). Lissage par moyenne mobile `Rolling` dans Pandas.
 
 **3. IA Nativement Interconnectée au SGBD**
 * Random Forest avec ajustement du poids des classes sous-représentées (`class_weight='balanced'`).
-* Pas de CSV transitoire de manipulation : L'IA requête directement sa base via SQL queries, garantissant la sûreté et la fraîcheur ("Source of Truth").
+* L'IA requête directement sa base via SQL queries, garantissant la sûreté et la fraîcheur ("Source of Truth").
 
 ### 🛡️ Sécurité, Qualité & Robustesse
 | Aspect | Implémentation |
@@ -132,33 +132,27 @@ python --version  # Doit être >= 3.12
 # 1. Naviguer dans le dossier du projet
 cd Camrail-Industrial-Data-Platform
 
-# 2. Créer un environnement virtuel (Recommandé)
+# 2. Créer un environnement virtuel
 python -m venv env
 .\env\Scripts\activate
 
-# 3. Installer les dépendances strictes
+# 3. Installer les dépendances
 pip install -r requirements.txt
 
-# 4. Lancer l'usine numérique (Orchestrateur Complet E2E)
+# 4. Lancer l'usine numérique (Orchestrateur E2E)
 python run_industrial_platform.py
 ```
 *(Une fois terminé, regardez dans le dossier `database/`, le fichier `industrial_dwh.sqlite` contiendra toutes vos tables, données nettoyées, et prédictions de pannes.)*
 
 ---
 
-## 🔧 INSTALLATION COMPLÈTE
-Suivre les étapes de Démarrage Rapide. L'architecture a été conçue pour s'initialiser de façon instantanée via un `requirements.txt` figé aux versions testées.
-
----
-
 ## 📖 GUIDE D'UTILISATION
 
 ### Analyse des Résultats
-
 Une fois l'orchestrateur exécuté :
 1. **Dossier `database/`** : Ouvrez `industrial_dwh.sqlite` avec un client SGBD léger comme [DB Browser for SQLite] ou [DBeaver].
 2. **Tables disponbiles** : Inspectez les tables "fact_telemetry_features" (vos données pures formatées) et "ai_telemetry_predictions" (enrichies du `%_de_Risque_Panne`).
-3. **Power BI** : Dans Power BI Desktop, "Obtenir les données" -> "Connecteur ODBC / Base SQLite", pointez sur le chemin absolu du fichier `.sqlite` et importez le tout ! Plus besoin de rafraîchir manuellement un CSV !
+3. **Power BI** : Dans Power BI Desktop, connectez la source ODBC/SQLite sur le fichier `.sqlite` absolu.
 
 ---
 
@@ -179,30 +173,18 @@ Une fois l'orchestrateur exécuté :
 * [x] Pipeline EXTRACT, TRANSFORM, LOAD complet en mémoire
 * [x] Enrobement SGBD par SQLAlchemy Engine
 * [x] Rétro-Connexion du Machine Learning et prédiction par scoring SQL
-* [x] Design "End-to-End" achevé
+* [x] Design "End-to-End" achevé orienté Fret Logistique
 
 **Version 1.1.0 (Prochaine Release)** 🚧
 * Bascule dynamique sur un PostgreSQL Azure Cloud au lieu du ficher SQLite file-system.
-* Conteneurisation (Docker).
 
 ---
-
-## 📄 LICENCE
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
 
 ## 👨‍💻 AUTEUR
 **KAMENI TCHOUATCHEU GAETAN BRUNEL**  
 *Ingénieur Logiciel & Data | Étudiant ESIEA*
 
 📧 Email : gaetanbrunel.kamenitchouatcheu@et.esiea.fr  
-💼 LinkedIn : [Votre profil LinkedIn]  
 🐙 GitHub : @Lkb-2905  
-
-## 🙏 REMERCIEMENTS
-* **Scikit-Learn & Pandas Community :** Pour la fiabilité du socle mathématique mondial.
-* **SQLAlchemy :** Pour simplifier l'hybridation des langages objets et modélisation de données.
-
-⭐ Si ce projet "bout-en-bout" vous a été utile, n'hésitez pas à lui donner une étoile !  
-Fait avec ❤️ et de l'architecture logicielle de pointe.
 
 © 2026 Kameni Tchouatcheu Gaetan Brunel - Tous droits réservés
