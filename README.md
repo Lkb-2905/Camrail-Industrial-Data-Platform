@@ -222,7 +222,7 @@ Ingénieur Logiciel & Data Scientist en devenir | Étudiant ESIEA
 * **Bolloré Logistics & Camrail :** Pour l'envergure des architectures d'Ingénierie de Haute Technologie.
 * **ESIEA :** Pour l'esprit d'initiative.
 
-⭐ Laissez une étoile pour soutenir le Full-Stack Data Engineering Européen !  
+⭐ Laissez une étoile pour soutenir le Full-Stack Data Engineering Camerounais !  
 Fait avec ❤️, Scikit et SQLAlchemy.  
 
 © 2026 Kameni Tchouatcheu Gaetan Brunel - Tous droits réservés
