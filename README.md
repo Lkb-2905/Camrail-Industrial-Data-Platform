@@ -132,8 +132,9 @@ python --version  # Doit être >= 3.12
 # 1. Naviguer dans le dossier du projet
 cd Camrail-Industrial-Data-Platform
 
-# 2. Créer un environnement virtuel
-python -m venv env
+# 2. Créer un environnement virtuel (Ajustement Pyenv Windows MSYS2)
+Remove-Item -Recurse -Force env -ErrorAction SilentlyContinue
+C:\Users\pc\.pyenv\pyenv-win\versions\3.12.10\python.exe -m venv env
 .\env\Scripts\activate
 
 # 3. Installer les dépendances
